@@ -1,0 +1,66 @@
+.automation-card {
+    width: 25%;
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+.header-status {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.propertyOnChange {
+    height: 15px;
+    width: 15px;
+    background-color: #ff0040;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.clear {
+    clear: both;
+}
+
+.property-type {
+    background-color: #f0f0f0;
+    padding: 10px;
+}
+
+.property-type-ON {
+    background-color: #99ff99;
+}
+
+.device-type-2000 {
+    background-color: #00b8ff;
+}
+
+.device-type-3000 {
+    background-color: #ff6666;
+}
+
+.device-type-4000 {
+    background-color: #ffa3f7;
+}
+
+.device-type-7000,
+.device-type-8000 {
+    background-color: #ffcccc;
+}
+
+.device-type-9000,
+.device-type-10000 {
+    background-color: #99ff99;
+}
+
+@media (max-width: 720px) {
+    .automation-card {
+        width: auto;
+        float: none;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}

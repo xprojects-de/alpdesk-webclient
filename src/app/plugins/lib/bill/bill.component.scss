@@ -1,0 +1,12 @@
+.bill-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.bill-container > * {
+    width: 100%;
+}
+
+.bill-msgcontainer {
+    margin-top: 20px;
+}

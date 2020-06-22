@@ -1,0 +1,31 @@
+<mat-toolbar>
+    <span>Create Bill</span>
+</mat-toolbar>
+<mat-card class="bill-card">
+    <mat-dialog-content>
+        <div class="bill-container">
+
+            <ng-container *ngFor="let issue of billInfo.items">
+                <mat-form-field>
+                    <input [(ngModel)]="issue.label" matInput [placeholder]="'Label'"
+                        value="issue.label">
+                </mat-form-field>
+                <mat-form-field>
+                    <input [(ngModel)]="issue.value" matInput [placeholder]="'Value'"
+                        value="issue.value">
+                </mat-form-field>
+            </ng-container>
+
+            <mat-form-field>
+                <input matInput placeholder="Billnumber" [(ngModel)]="billInfo.billnumber">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Subject" [(ngModel)]="billInfo.subject">
+            </mat-form-field>
+            <mat-form-field>
+                <textarea matInput placeholder="Billaddress" [(ngModel)]="billInfo.address"></textarea>
+            </mat-form-field>
+            <button mat-raised-button (click)="submit()" color="primary">create Bill</button>
+        </div>
+    </mat-dialog-content>
+</mat-card>

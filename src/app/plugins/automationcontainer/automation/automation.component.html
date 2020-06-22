@@ -1,0 +1,27 @@
+<mat-toolbar>
+    <span>Automation</span>
+</mat-toolbar>
+<mat-divider></mat-divider>
+<mat-spinner *ngIf="loaded === false"></mat-spinner>
+<div>
+    <mat-card class="automation-card" *ngFor="let device of automationResult.items">
+        <mat-card-header>    
+            <div mat-card-avatar class="header-status device-type-{{device.devicevalue.type}}"> </div>
+            <mat-card-title>{{device.devicevalue.name}}</mat-card-title>
+            <mat-card-subtitle>{{device.devicevalue.categorie}}</mat-card-subtitle>
+        </mat-card-header>     
+        <mat-card-content>
+            <p class="property-type property-type-{{property.value}}" *ngFor="let property of device.devicevalue.properties">
+                {{property.displayName}}: {{property.value}}
+                <ng-template [ngIf]="device.devicevalue.type === 2000 && (property.value === 'ON' || property.value === 'OFF')">
+                    <button mat-button (click)="toggle(device.devicehandle,property.handle,property.value)">Toggle</button>
+                </ng-template>
+                <ng-template [ngIf]="property.changed === true">
+                    <div class="propertyOnChange"></div>
+                </ng-template>
+            </p>
+        </mat-card-content>
+    </mat-card>
+    <div class="clear"></div>
+</div>
+

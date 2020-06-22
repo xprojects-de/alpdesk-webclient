@@ -1,0 +1,39 @@
+<mat-toolbar>
+    <span>Offer</span>
+</mat-toolbar>
+<mat-divider></mat-divider>
+<mat-card class="offer-card">
+    <mat-dialog-content>
+        <div class="offer-container">
+
+            <ng-container *ngFor="let position of offer.items">
+                <mat-form-field>
+                    <textarea [(ngModel)]="position.label" matInput [placeholder]="'Position'"
+                        value="position.label"></textarea>
+                </mat-form-field>
+                <mat-form-field>
+                    <input [(ngModel)]="position.value" matInput [placeholder]="'Price'" value="position.value">
+                </mat-form-field>
+                <div>
+                    <mat-checkbox [checked]="position.optional" [(ngModel)]="position.optional">optional</mat-checkbox>
+                </div>
+                <button mat-icon-button (click)="remove(position)">
+                    <mat-icon>remove</mat-icon>
+                </button>
+                <hr>
+            </ng-container>
+
+            <button mat-icon-button (click)="add()">
+                <mat-icon>add</mat-icon>
+            </button>
+
+            <mat-form-field>
+                <input matInput placeholder="Subject" [(ngModel)]="offer.subject">
+            </mat-form-field>
+            <mat-form-field>
+                <textarea matInput placeholder="Address" [(ngModel)]="offer.address"></textarea>
+            </mat-form-field>
+            <button mat-raised-button (click)="submit()" color="primary">create Offer</button>
+        </div>
+    </mat-dialog-content>
+</mat-card>

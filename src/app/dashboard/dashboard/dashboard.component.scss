@@ -1,0 +1,36 @@
+.dashboard-card {
+    width: 25%;
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+.header-status {
+    height: 25px;
+    width: 25px;
+    background-color: #00b8ff;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dashboard-card-link {
+    cursor: pointer;
+}
+
+.clear {
+    clear: both;
+}
+
+.property-type {
+    background-color: #f0f0f0;
+    padding: 10px;
+}
+
+@media (max-width: 720px) {
+    .automation-card {
+        width: auto;
+        float: none;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}

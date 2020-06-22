@@ -1,0 +1,23 @@
+<div id="wrapper">
+    <div id="header">
+        <mat-toolbar color="primary">
+            <mat-toolbar-row *ngIf="rest.loggedin === true">
+                <button mat-button [matMenuTriggerFor]="menu">
+                    <mat-icon>menu</mat-icon><span>&nbsp;Menu</span>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <a mat-menu-item (click)="logout()" skipLocationChange="true" routerLinkActive="active">
+                        <mat-icon>supervisor_account</mat-icon><span>Logout</span>
+                    </a>
+                    <a mat-menu-item routerLink="/dashboard" skipLocationChange="true" routerLinkActive="active">
+                        <mat-icon>supervisor_account</mat-icon><span>Dashboard</span>
+                    </a>
+                </mat-menu>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </div>
+    <div id="container">
+        <router-outlet></router-outlet>
+    </div>
+    <div id="appversion"><span>Version: {{version}}</span></div>
+</div>

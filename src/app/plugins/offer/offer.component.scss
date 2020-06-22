@@ -1,0 +1,12 @@
+.offer-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.offer-container > * {
+    width: 100%;
+}
+
+.offer-msgcontainer {
+    margin-top: 20px;
+}

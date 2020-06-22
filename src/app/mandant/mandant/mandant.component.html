@@ -1,0 +1,12 @@
+<mat-toolbar>
+    <span>Mandant</span>
+</mat-toolbar>
+<mat-spinner *ngIf="loaded === false"></mat-spinner>
+<mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let mandantdata of mandant.data | keyvalue">
+        <h3 matLine>{{mandantdata.value.label}}</h3>
+        <p matLine>
+           <span>{{mandantdata.value.value}}</span>
+        </p>
+    </mat-list-item>
+</mat-list>

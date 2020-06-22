@@ -1,0 +1,25 @@
+<mat-toolbar *ngIf="loaded === true">
+    <span>Dashboard</span>
+</mat-toolbar>
+<mat-divider></mat-divider>
+<mat-spinner *ngIf="loaded === false"></mat-spinner>
+<div>
+    <mat-card class="dashboard-card" *ngFor="let mandantplugins of mandant.plugins | keyvalue">
+        <ng-template [ngIf]="mandantplugins.value.customTemplate === true">
+            <mat-card-header class="dashboard-card-link" (click)="this.navigateTo('/customcontainer', {plugin: mandantplugins.value.value, params: null})">
+                <div mat-card-avatar class="header-status"> </div>
+                <mat-card-title>{{mandantplugins.value.label}}</mat-card-title>
+                <mat-card-subtitle>Plugin</mat-card-subtitle>
+            </mat-card-header>
+        </ng-template>
+        <ng-template [ngIf]="mandantplugins.value.customTemplate === false">
+            <mat-card-header class="dashboard-card-link" routerLink="/{{mandantplugins.value.value}}" skipLocationChange="true"
+                routerLinkActive="active">
+                <div mat-card-avatar class="header-status"> </div>
+                <mat-card-title>{{mandantplugins.value.label}}</mat-card-title>
+                <mat-card-subtitle>Plugin</mat-card-subtitle>
+            </mat-card-header>
+        </ng-template>
+    </mat-card>
+    <div class="clear"></div>
+</div>

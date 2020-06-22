@@ -1,0 +1,22 @@
+<mat-toolbar>
+    <span>Jira</span>
+</mat-toolbar>
+<mat-divider></mat-divider>
+<mat-spinner *ngIf="loaded === false"></mat-spinner>
+<mat-selection-list [(ngModel)]="selectedOptions" (ngModelChange)="onSelectedOptionsChange($event)" #billissues>
+    <mat-list-option *ngFor="let issue of issues" [value]="issue">
+        <mat-spinner [diameter]="20" *ngIf="issue.completeprices === ''"></mat-spinner>
+        <ng-container *ngIf="issue.completeprices !== ''">
+            <h3 matLine>
+                <a mat-button href="{{issue.link}}" target="_blank">
+                    <mat-icon>info</mat-icon>
+                </a>
+                <strong>Issue: </strong> {{issue.summary}} |
+                <strong>Price: </strong> {{issue.completeprices}} € |
+                <small>Worklog: {{issue.completeHours}} h</small>
+            </h3>
+        </ng-container>
+    </mat-list-option>
+</mat-selection-list>
+<hr>
+<app-bill [billInfo]="billInfo"></app-bill>
