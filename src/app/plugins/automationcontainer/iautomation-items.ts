@@ -8,6 +8,8 @@ export interface IAutomationItemsChangeValue {
 export interface IAutomationItemsChanges {
     devicehandle: number;
     devicevalue: IAutomationItemsChangeValue;
+    tstamp: number;
+    date: string;
 }
 
 export interface IAutomationItemsValueProperties {
@@ -27,6 +29,8 @@ export interface IAutomationItemsValue {
 export interface IAutomationItems {
     devicehandle: number;
     devicevalue: IAutomationItemsValue;
+    tstamp: number;
+    date: string;
 }
 
 export interface IAutomationResult {
