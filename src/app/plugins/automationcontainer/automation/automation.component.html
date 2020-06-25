@@ -8,7 +8,7 @@
         <mat-card-header>    
             <div mat-card-avatar class="header-status device-type-{{device.devicevalue.type}}"> </div>
             <mat-card-title>{{device.devicevalue.name}}</mat-card-title>
-            <mat-card-subtitle>{{device.devicevalue.categorie}}</mat-card-subtitle>
+            <mat-card-subtitle>{{device.devicevalue.categorie}} | {{device.date}}</mat-card-subtitle>
         </mat-card-header>     
         <mat-card-content>
             <p class="property-type property-type-{{property.value}}" *ngFor="let property of device.devicevalue.properties">
