@@ -3,8 +3,8 @@
 
 /* ======== Angular material custom themes ======== */  
 
-$alpdesktheme-primary: mat-palette($mat-green);
-$alpdesktheme-accent: mat-palette($mat-green, 100, 500, A100);
+$alpdesktheme-primary: mat-palette($mat-light-green);
+$alpdesktheme-accent: mat-palette($mat-grey, 100, 500, A100);
 $alpdesktheme-warn: mat-palette($mat-red);
 
 $alpdesktheme: mat-light-theme($alpdesktheme-primary, $alpdesktheme-accent, $alpdesktheme-warn);
