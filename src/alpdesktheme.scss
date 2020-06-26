@@ -1,0 +1,12 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+/* ======== Angular material custom themes ======== */  
+
+$alpdesktheme-primary: mat-palette($mat-green);
+$alpdesktheme-accent: mat-palette($mat-green, 100, 500, A100);
+$alpdesktheme-warn: mat-palette($mat-red);
+
+$alpdesktheme: mat-light-theme($alpdesktheme-primary, $alpdesktheme-accent, $alpdesktheme-warn);
+
+@include angular-material-theme($alpdesktheme);
