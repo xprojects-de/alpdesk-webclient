@@ -100,7 +100,9 @@ export class RestService {
   }
 
   upload(formData: FormData) {
-    return this.http.post<any>(this.endpoint + '/upload', formData, {      
+    this.log(formData);
+    return this.http.post<any>(this.endpoint + '/upload', formData, {     
+      headers: new HttpHeaders().append('Authorization', 'Bearer ' + this.alpdesk_token), 
       reportProgress: true,
       observe: 'events'
     });
