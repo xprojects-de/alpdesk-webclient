@@ -16,6 +16,9 @@ export interface IAutomationItemsValueProperties {
     displayName: string;
     handle: number;
     value: string;
+    stateful: boolean;
+    editable: boolean;
+    toggleEnabled: boolean;
     changed: boolean;
 }
 

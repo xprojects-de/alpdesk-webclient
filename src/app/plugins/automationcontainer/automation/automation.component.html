@@ -2,6 +2,8 @@
     <span>Automation</span>
 </mat-toolbar>
 <mat-divider></mat-divider>
+<button mat-button (click)="loadItems()">reload</button>
+<mat-divider></mat-divider>
 <mat-spinner *ngIf="loaded === false"></mat-spinner>
 <div>
     <mat-card class="automation-card" *ngFor="let device of automationResult.items">
@@ -13,7 +15,7 @@
         <mat-card-content>
             <p class="property-type property-type-{{property.value}}" *ngFor="let property of device.devicevalue.properties">
                 {{property.displayName}}: {{property.value}}
-                <ng-template [ngIf]="device.devicevalue.type === 2000 && (property.value === 'ON' || property.value === 'OFF')">
+                <ng-template [ngIf]="property.toggleEnabled === true">
                     <button mat-button (click)="toggle(device.devicehandle,property.handle,property.value)">Toggle</button>
                 </ng-template>
                 <ng-template [ngIf]="property.changed === true">

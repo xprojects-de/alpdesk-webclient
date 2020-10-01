@@ -27,7 +27,7 @@ export class AutomationComponent extends BaseComponent implements OnInit {
     this.loadItems();
   }
 
-  private loadItems() {
+  loadItems() {
     this.automationResult.error = true;
     this.automationResult.items = [];
     this.automationResult.changes = [];
@@ -37,15 +37,30 @@ export class AutomationComponent extends BaseComponent implements OnInit {
         this.rest.log(res);
         if (res !== null && res !== undefined) {
           const resAuto: IAutomationResult = (res.data as IAutomationResult);
-          if(resAuto.error === false) {
-            if(resAuto.changes.length > 0) {
+          if (resAuto.error === false) {
+
+            // device.devicevalue.type === 2000 && (property.value === 'ON' || property.value === 'OFF')
+            if (resAuto.items.length > 0) {
+              resAuto.items.forEach((item: IAutomationItems) => {
+                const itemProps: IAutomationItemsValue = (item.devicevalue as IAutomationItemsValue);
+                if (itemProps.properties.length > 0) {
+                  itemProps.properties.forEach((propertyItem: IAutomationItemsValueProperties) => {
+                    if (propertyItem.editable === true && propertyItem.stateful === true || (item.devicevalue.type === 2000 && (propertyItem.value === 'ON' || propertyItem.value === 'OFF'))) {
+                      propertyItem.toggleEnabled = true;
+                    }
+                  });
+                }
+              });
+            }
+
+            if (resAuto.changes.length > 0) {
               resAuto.changes.forEach((changedItem: IAutomationItemsChanges) => {
                 resAuto.items.forEach((checkItem: IAutomationItems) => {
-                  if(changedItem.devicehandle === checkItem.devicehandle) {
+                  if (changedItem.devicehandle === checkItem.devicehandle) {
                     const checkItemProps: IAutomationItemsValue = (checkItem.devicevalue as IAutomationItemsValue);
-                    if(checkItemProps.properties.length > 0) {
+                    if (checkItemProps.properties.length > 0) {
                       checkItemProps.properties.forEach((propertyItem: IAutomationItemsValueProperties) => {
-                        if(propertyItem.handle === changedItem.devicevalue.propertiehandle) {
+                        if (propertyItem.handle === changedItem.devicevalue.propertiehandle) {
                           propertyItem.changed = true;
                         }
                       });
@@ -59,7 +74,7 @@ export class AutomationComponent extends BaseComponent implements OnInit {
           } else {
             this.rest.log(res);
             this.showSnackBar('Error loading Items');
-          }                 
+          }
           this.loaded = true;
         }
       },
@@ -73,7 +88,7 @@ export class AutomationComponent extends BaseComponent implements OnInit {
   }
 
   toggle(deviceHandle: string, propertiehandle: number, value: string): void {
-    const newValue : number= (value === 'ON' ? 0 : 1);
+    const newValue: number = (value === 'ON' ? 0 : 1);
     const toggleItem = {
       devicehandle: Number(deviceHandle), devicevalue: {
         devicehandle: Number(deviceHandle), propertiehandle, value: newValue
@@ -85,13 +100,13 @@ export class AutomationComponent extends BaseComponent implements OnInit {
         this.rest.log(res);
         if (res !== null && res !== undefined) {
           const resAuto: IAutomationResult = (res.data as IAutomationResult);
-          if(resAuto.error === false) {
+          if (resAuto.error === false) {
             this.showSnackBar('Modify Item ok');
             this.loadItems();
           } else {
             this.rest.log(res);
             this.showSnackBar('Error modify Items');
-          }                 
+          }
           this.loaded = true;
         }
       },
