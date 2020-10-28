@@ -27,7 +27,8 @@
 }
 
 @media (max-width: 720px) {
-    .automation-card {
+    .automation-card,
+    .dashboard-card {
         width: auto;
         float: none;
         margin-right: 0;
