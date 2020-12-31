@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MandantComponent } from './mandant.component';
 
@@ -6,7 +6,7 @@ describe('MandantComponent', () => {
   let component: MandantComponent;
   let fixture: ComponentFixture<MandantComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MandantComponent ]
     })
