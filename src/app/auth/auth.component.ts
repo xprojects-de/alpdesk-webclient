@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from '../basedata/base/base.component';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { RestService } from '../services/rest.service';
-import { Router } from '@angular/router';
-import { DeviceDetectorService } from 'ngx-device-detector';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { IAuth } from '../interfaces/iauth';
+import {Component, OnInit} from '@angular/core';
+import {BaseComponent} from '../basedata/base/base.component';
+import {FormGroup, FormBuilder} from '@angular/forms';
+import {RestService} from '../services/rest.service';
+import {Router} from '@angular/router';
+import {DeviceDetectorService} from 'ngx-device-detector';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {IAuth} from '../interfaces/iauth';
 
 @Component({
   selector: 'app-auth',
@@ -43,7 +43,8 @@ export class AuthComponent extends BaseComponent {
           this.log(error);
           this.showSnackBar('Error at login');
         },
-        () => { }
+        () => {
+        }
       );
   }
 

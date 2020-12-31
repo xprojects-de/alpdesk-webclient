@@ -9,7 +9,6 @@
             <mat-card-header class="dashboard-card-link" (click)="this.navigateTo('/customcontainer', {plugin: mandantplugins.value.value, params: null})">
                 <div mat-card-avatar class="header-status"> </div>
                 <mat-card-title>{{mandantplugins.value.label}}</mat-card-title>
-                <mat-card-subtitle>Plugin</mat-card-subtitle>
             </mat-card-header>
         </ng-template>
         <ng-template [ngIf]="mandantplugins.value.customTemplate === false">
@@ -17,7 +16,6 @@
                 routerLinkActive="active">
                 <div mat-card-avatar class="header-status"> </div>
                 <mat-card-title>{{mandantplugins.value.label}}</mat-card-title>
-                <mat-card-subtitle>Plugin</mat-card-subtitle>
             </mat-card-header>
         </ng-template>
     </mat-card>
