@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthComponent } from './auth/auth.component';
 import { AppConfigService } from './services/app-config.service';
 import { HttpClientModule } from '@angular/common/http';
-import { DeviceDetectorModule } from 'ngx-device-detector';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BaseComponent } from './basedata/base/base.component';
@@ -56,7 +55,6 @@ export function initializeApp(appConfig: AppConfigService) {
     AppRoutingModule,
     HttpClientModule,
     AppMaterialmoduleModule,
-    DeviceDetectorModule.forRoot(),
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
