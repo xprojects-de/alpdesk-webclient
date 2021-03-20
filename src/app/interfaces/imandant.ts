@@ -18,4 +18,11 @@ export interface IMandant {
     mandantId: number;
     plugins: IMandantPlugin[];
     data: IMandantData[];
+    accessFinderCopy: boolean;
+    accessFinderCreate: boolean;
+    accessFinderDelete: boolean;
+    accessFinderDownload: boolean;
+    accessFinderMove: boolean;
+    accessFinderRename: boolean;
+    accessFinderUpload: boolean;
 }

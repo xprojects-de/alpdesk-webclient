@@ -1,16 +1,41 @@
 <mat-toolbar>
     <span>Finder</span>
 </mat-toolbar>
-<mat-divider></mat-divider>
-<div style="padding: 20px; height: 100%; box-sizing: border-box;">
-    <mat-card style="height: 100%; box-sizing: border-box; padding:0">
-        <app-file-explorer [fileElements]="fileElements | async" [parentfileElements]="parentfileElements | async"
-            [path]="currentPath" [canNavigateUp]="canNavigateUp" (folderAdded)="addFolder($event)"
-            (elementRemoved)="removeElement($event)" (navigatedDown)="navigateToFolder($event)"
-            (navigatedUp)="navigateUp()" (elementRenamed)="renameElement($event)" (elementMoved)="moveElement($event)"
-            (fileClick)="clickToFile($event)" (refreshClick)="refresh()">
-        </app-file-explorer>
-    </mat-card>
-</div>
 
-<app-upload [targetPath]="currentPath"></app-upload>
+<mat-divider></mat-divider>
+
+<button>
+    <mat-icon (click)="init()"> refresh</mat-icon>
+</button>
+
+Path: {{currentFileElement.path}}
+
+<span style="padding: 20px; height: 100%; box-sizing: border-box;">
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+            <button *ngIf="node.item.isFolder === true">
+                <mat-icon (click)="refresh(node, treeControl)"> refresh</mat-icon>
+            </button>
+            <button *ngIf="node.item.isFolder === true" (click)="currentFileElement = node.item" mat-icon-button
+                    [attr.aria-label]="'Toggle ' + node.item.name"
+                    matTreeNodeToggle>
+                <mat-icon class="mat-icon-rtl-mirror">
+                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+            </button>
+            <button *ngIf="node.item.isFolder === false" (click)="download(node.item)">
+                <mat-icon> insert_drive_file</mat-icon>
+            </button>
+            <button (click)="openRenameDialog(node.item)">
+                <mat-icon> edit</mat-icon>
+            </button>
+            <button (click)="deleteElement(node,treeControl)">
+                <mat-icon> delete</mat-icon>
+            </button>
+            <span>{{node.item.name}}</span>
+            <mat-progress-bar *ngIf="node.isLoading" mode="indeterminate"
+                              class="finder-tree-progress-bar"></mat-progress-bar>
+        </mat-tree-node>
+    </mat-tree>
+
+    <app-upload [targetPath]="currentFileElement"></app-upload>

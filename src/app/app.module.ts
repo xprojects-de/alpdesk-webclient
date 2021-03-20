@@ -11,9 +11,8 @@ import { BaseComponent } from './basedata/base/base.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { MandantComponent } from './mandant/mandant/mandant.component';
 import { FinderComponent } from './plugins/finder/finder.component';
-import { FileExplorerComponent } from './plugins/lib/file-explorer/file-explorer.component';
-import { NewFolderDialogComponent } from './plugins/lib/file-explorer/modals/newFolderDialog/newFolderDialog.component';
-import { RenameDialogComponent } from './plugins/lib/file-explorer/modals/renameDialog/renameDialog.component';
+import { NewFolderDialogComponent } from './plugins/finder/modals/newFolderDialog/newFolderDialog.component';
+import { RenameDialogComponent } from './plugins/finder/modals/renameDialog/renameDialog.component';
 import { UploadComponent } from './plugins/lib/upload/upload.component';
 import { HelloComponent } from './plugins/hello/hello.component';
 import { JiraComponent } from './plugins/jiracontainer/jira/jira.component';
@@ -37,7 +36,6 @@ export function initializeApp(appConfig: AppConfigService) {
     NewFolderDialogComponent,
     RenameDialogComponent,
     FinderComponent,
-    FileExplorerComponent,
     UploadComponent,
     HelloComponent,
     JiraComponent,
