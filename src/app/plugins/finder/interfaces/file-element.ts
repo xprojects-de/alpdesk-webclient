@@ -4,6 +4,7 @@ export interface FileElement {
     isimage: boolean;
     name: string;
     path: string;
+    relativePath: string;
     public: boolean;
     size: number;
     url: string;

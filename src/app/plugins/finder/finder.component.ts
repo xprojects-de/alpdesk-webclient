@@ -12,7 +12,6 @@ import {FlatTreeControl} from '@angular/cdk/tree';
 import {map} from 'rxjs/operators';
 import {HttpResponse} from '@angular/common/http';
 import {RenameDialogComponent} from './modals/renameDialog/renameDialog.component';
-import {MatMenuTrigger} from '@angular/material/menu';
 import {NewFolderDialogComponent} from './modals/newFolderDialog/newFolderDialog.component';
 import {MatDialog} from '@angular/material/dialog';
 
@@ -171,6 +170,7 @@ export class FinderComponent extends BaseComponent {
 
     currentFileElement: FileElement = {
         path: '/',
+        relativePath: '/',
         uuid: '/',
         extention: '',
         isFolder: true,
@@ -200,6 +200,7 @@ export class FinderComponent extends BaseComponent {
         this.dataSource.data = [];
         this.currentFileElement = {
             path: '/',
+            relativePath: '/',
             uuid: '/',
             extention: '',
             isFolder: true,
@@ -248,11 +249,25 @@ export class FinderComponent extends BaseComponent {
         );
     }
 
-    openNewFolderDialog() {
-        const dialogRef = this.dialog.open(NewFolderDialogComponent);
-        dialogRef.afterClosed().subscribe(res => {
-            if (res) {
+    private async createFolder(name: string) {
+        const result = await this.rest.finder({'mode': 'create', 'src': this.currentFileElement.relativePath + '/' + name, 'target': 'dir'});
+        if (result !== null && result !== undefined) {
+            this.showSnackBar('Folder created successfully');
+        } else {
+            this.showSnackBar('Error creating Folder');
+        }
+        this.init();
+    }
 
+    openCreateFolderDialog() {
+        const dialogRef = this.dialog.open(NewFolderDialogComponent, {
+            width: '90%'
+        });
+        dialogRef.afterClosed().subscribe(res => {
+            if (res !== null && res !== undefined && res !== '') {
+                this.createFolder(res);
+            } else {
+                this.showSnackBar('Error create Folder');
             }
         });
     }

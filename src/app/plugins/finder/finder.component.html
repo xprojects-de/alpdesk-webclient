@@ -8,7 +8,11 @@
     <mat-icon (click)="init()"> refresh</mat-icon>
 </button>
 
-Path: {{currentFileElement.path}}
+<button>
+    <mat-icon (click)="openCreateFolderDialog()"> create_new_folder</mat-icon>
+</button>
+
+Path: {{currentFileElement.relativePath}}
 
 <span style="padding: 20px; height: 100%; box-sizing: border-box;">
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
