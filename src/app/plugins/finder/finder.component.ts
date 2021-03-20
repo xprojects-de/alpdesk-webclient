@@ -187,6 +187,9 @@ export class FinderComponent extends BaseComponent {
     isExpandable = (node: DynamicFlatNode) => node.expandable;
     hasChild = (_: number, _nodeData: DynamicFlatNode) => _nodeData.expandable;
 
+    pasteElementContainer?: FileElement;
+    pastMode = 0;
+
     constructor(public rest: RestService, public router: Router, public deviceService: DeviceDetectorService, private formBuilder: FormBuilder, public snackBar: MatSnackBar, public database: DynamicDatabase, public dialog: MatDialog) {
         super(rest, router, deviceService, snackBar);
 
@@ -197,6 +200,8 @@ export class FinderComponent extends BaseComponent {
     }
 
     init() {
+        this.pasteElementContainer = null;
+        this.pastMode = 0;
         this.dataSource.data = [];
         this.currentFileElement = {
             path: '/',
@@ -250,7 +255,11 @@ export class FinderComponent extends BaseComponent {
     }
 
     private async createFolder(name: string) {
-        const result = await this.rest.finder({'mode': 'create', 'src': this.currentFileElement.relativePath + '/' + name, 'target': 'dir'});
+        const result = await this.rest.finder({
+            'mode': 'create',
+            'src': this.currentFileElement.relativePath + '/' + name,
+            'target': 'dir'
+        });
         if (result !== null && result !== undefined) {
             this.showSnackBar('Folder created successfully');
         } else {
@@ -306,6 +315,45 @@ export class FinderComponent extends BaseComponent {
                 this.showSnackBar('Error rename Item');
             }
         });
+    }
+
+    copyElement(element: FileElement) {
+        this.pasteElementContainer = element;
+        this.pastMode = 1;
+    }
+
+    moveElement(element: FileElement) {
+        this.pasteElementContainer = element;
+        this.pastMode = 2;
+    }
+
+    async pasteElement(element: FileElement) {
+        if (this.pasteElementContainer !== null && this.pasteElementContainer !== undefined && this.pastMode !== 0) {
+
+            if (this.pastMode === 1) {
+                const result = await this.rest.finder({'mode': 'copy', 'src': this.pasteElementContainer.uuid, 'target': element.uuid});
+                if (result !== null && result !== undefined) {
+                    this.showSnackBar('Item copied successfully');
+                } else {
+                    this.showSnackBar('Error copy Item');
+                }
+            } else if (this.pastMode === 2) {
+                const result = await this.rest.finder({'mode': 'move', 'src': this.pasteElementContainer.uuid, 'target': element.uuid});
+                if (result !== null && result !== undefined) {
+                    this.showSnackBar('Item moved successfully');
+                } else {
+                    this.showSnackBar('Error move Item');
+                }
+            } else {
+                this.showSnackBar('Error paste Item');
+            }
+
+
+        } else {
+            this.showSnackBar('Error paste Item');
+        }
+
+        this.init();
     }
 
 }
