@@ -17,37 +17,51 @@ Path: {{currentFileElement.relativePath}}
 <span style="padding: 20px; height: 100%; box-sizing: border-box;">
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
         <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+
             <button *ngIf="node.item.isFolder === true">
                 <mat-icon (click)="refresh(node, treeControl)"> refresh</mat-icon>
             </button>
-            <button *ngIf="node.item.isFolder === true" (click)="currentFileElement = node.item" mat-icon-button
+
+            <button *ngIf="node.item.isFolder === false" (click)="download(node.item)" title="Download {{node.item.name}}">
+                <mat-icon> insert_drive_file</mat-icon>
+            </button>
+
+            <button (click)="openRenameDialog(node.item)" title="Rename {{node.item.name}}">
+                <mat-icon> edit</mat-icon>
+            </button>
+
+            <button (click)="deleteElement(node,treeControl)" title="Delete {{node.item.name}}">
+                <mat-icon> delete</mat-icon>
+            </button>
+
+            <button (click)="copyElement(node.item)" title="Copy {{node.item.name}}">
+                <mat-icon> content_copy</mat-icon>
+            </button>
+
+            <button (click)="moveElement(node.item)" title="Move {{node.item.name}}">
+                <mat-icon> north_east</mat-icon>
+            </button>
+
+            <button *ngIf="pasteElementContainer !== null && pasteElementContainer !== undefined && node.item.isFolder === true"
+                    (click)="pasteElement(node.item)" title="Paste {{pasteElementContainer.name}} to  {{node.item.name}}">
+                <mat-icon> content_paste</mat-icon>
+            </button>
+
+            <button *ngIf="node.item.isFolder === true" (click)="currentFileElement = node.item"
+                    mat-icon-button
                     [attr.aria-label]="'Toggle ' + node.item.name"
                     matTreeNodeToggle>
                 <mat-icon class="mat-icon-rtl-mirror">
                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                 </mat-icon>
             </button>
-            <button *ngIf="node.item.isFolder === false" (click)="download(node.item)">
-                <mat-icon> insert_drive_file</mat-icon>
-            </button>
-            <button (click)="openRenameDialog(node.item)">
-                <mat-icon> edit</mat-icon>
-            </button>
-            <button (click)="deleteElement(node,treeControl)">
-                <mat-icon> delete</mat-icon>
-            </button>
-            <button (click)="copyElement(node.item)">
-                <mat-icon> content_copy</mat-icon>
-            </button>
-            <button (click)="moveElement(node.item)">
-                <mat-icon> north_east</mat-icon>
-            </button>
-            <button *ngIf="pasteElementContainer !== null && pasteElementContainer !== undefined && node.item.isFolder === true" (click)="pasteElement(node.item)">
-                <mat-icon> content_paste</mat-icon>
-            </button>
-            <span>{{node.item.name}}</span>
+
+            <span *ngIf="node.item.isFolder === true" class="dirNode">{{node.item.name}}</span>
+            <span *ngIf="node.item.isFolder === false" class="fileNode">{{node.item.name}}</span>
+
             <mat-progress-bar *ngIf="node.isLoading" mode="indeterminate"
                               class="finder-tree-progress-bar"></mat-progress-bar>
+
         </mat-tree-node>
     </mat-tree>
 
