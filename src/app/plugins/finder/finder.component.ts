@@ -255,9 +255,15 @@ export class FinderComponent extends BaseComponent {
     }
 
     private async createFolder(name: string) {
+
+        let prefix = this.currentFileElement.relativePath;
+        if (this.currentFileElement.relativePath === '/') {
+            prefix = '';
+        }
+
         const result = await this.rest.finder({
             'mode': 'create',
-            'src': this.currentFileElement.relativePath + '/' + name,
+            'src': prefix + '/' + name,
             'target': 'dir'
         });
         if (result !== null && result !== undefined) {
